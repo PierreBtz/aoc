@@ -1,8 +1,8 @@
 package eu.pierrebeitz.aoc._2020;
 
-import java.io.BufferedReader;
+import eu.pierrebeitz.aoc.utils.AocUtils;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.stream.Collectors;
 
 public class Day1Puzzle2 {
@@ -10,9 +10,7 @@ public class Day1Puzzle2 {
 
     public static void main(String[] args) throws IOException {
         //let's go simple, given the number of inputs n3 is acceptable
-        try (var reader =
-                   new BufferedReader(
-                         new InputStreamReader(Day1Puzzle2.class.getResourceAsStream("/eu/pierrebeitz/_2020/input-day1.txt")))) {
+        try (var reader = AocUtils.loadInputForDay(1)) {
             var expenses = reader.lines()
                   .map(Integer::valueOf)
                   .collect(Collectors.toList());
