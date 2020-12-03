@@ -10,27 +10,17 @@ public class Day2Puzzle1 {
     public static void main(String[] args) throws IOException {
         try (var reader = AocUtils.loadInputForDay(2)) {
             var result = reader.lines()
-                  .map(Record::new)
-                  .filter(Record::isValid)
+                  .map(RecordPuzzle1::new)
+                  .filter(RecordPuzzle1::isValid)
                   .count();
             System.out.println(result);
         }
     }
 
-    static class Record {
-        private final Range range;
-        private final char constraint;
-        private final String password;
+    static class RecordPuzzle1 extends ValidableRecord {
 
-        Record(String record) {
-            var pattern = Pattern.compile("^(\\d+)-(\\d+) (\\D): (.+)");
-            var matcher = pattern.matcher(record);
-            matcher.matches();
-            assert matcher.groupCount() == 4 : "This record needs to be analyzed: " + record;
-            range = new Range(Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2)));
-            assert matcher.group(3).length() == 1 : "This record needs to be analyzed: " + record;
-            constraint = matcher.group(3).charAt(0);
-            password = matcher.group(4);
+        RecordPuzzle1(String record) {
+            super(record);
         }
 
         boolean isValid() {
@@ -41,10 +31,29 @@ public class Day2Puzzle1 {
             System.err.println(this + "\n is: " + (valid ? "valid" : "not valid"));
             return valid;
         }
+    }
+
+    static abstract class ValidableRecord {
+        final Range range;
+        final char constraint;
+        final String password;
+
+        ValidableRecord(String record) {
+            var pattern = Pattern.compile("^(\\d+)-(\\d+) (\\D): (.+)");
+            var matcher = pattern.matcher(record);
+            matcher.matches();
+            assert matcher.groupCount() == 4 : "This record needs to be analyzed: " + record;
+            range = new Range(Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2)));
+            assert matcher.group(3).length() == 1 : "This record needs to be analyzed: " + record;
+            constraint = matcher.group(3).charAt(0);
+            password = matcher.group(4);
+        }
+
+        abstract boolean isValid();
 
         @Override
         public String toString() {
-            return "Record{" +
+            return "ValidableRecord{" +
                   "range=" + range +
                   ", constraint=" + constraint +
                   ", password='" + password + '\'' +
@@ -62,6 +71,14 @@ public class Day2Puzzle1 {
 
             boolean contains(long number) {
                 return number >= lower && number <= upper;
+            }
+
+            public int getLower() {
+                return lower;
+            }
+
+            public int getUpper() {
+                return upper;
             }
 
             @Override
