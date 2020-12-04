@@ -8,37 +8,47 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Day3Puzzle1 {
+    private static final Slope SLOPE = new Slope(3, 1);
 
     public static void main(String[] args) throws IOException {
         try (var reader = AocUtils.loadInputForDay(3)) {
-            var env = new Environment(reader.lines());
-            var treeCount = 0;
-            while (env.canMove()) {
-                treeCount += env.moveAndIsTree();
-            }
-            System.out.println(treeCount);
+            var env = new Environment(reader.lines(), SLOPE);
+            System.out.println(env.computeTreeCount());
         }
     }
 
     static class Environment {
-        private static final int VERTICAL_SLOPE = 3;
-        private static final int HORIZONTAL_SLOPE = 1;
+        private static final Position INITIAL_POSITION = new Position(0, 0);
 
         private final Map map;
+        private final Slope slope;
         private Position position;
 
-        Environment(Stream<String> inputs) {
-            map = new Map(inputs);
-            position = new Position(0, 0);
+        Environment(Stream<String> inputs, Slope slope) {
+            this(new Map(inputs), slope);
+        }
+
+        Environment(Map map, Slope slope) {
+            this.map = map;
+            position = INITIAL_POSITION;
+            this.slope = slope;
         }
 
         boolean canMove() {
-            return map.canMove(position, HORIZONTAL_SLOPE);
+            return map.canMove(position, slope.getDy());
         }
 
         int moveAndIsTree() {
-            position = map.move(position, VERTICAL_SLOPE, HORIZONTAL_SLOPE);
+            position = map.move(position, slope);
             return map.isTree(position) ? 1 : 0;
+        }
+
+        long computeTreeCount() {
+            var treeCount = 0L;
+            while (canMove()) {
+                treeCount += moveAndIsTree();
+            }
+            return treeCount;
         }
     }
 
@@ -55,8 +65,8 @@ public class Day3Puzzle1 {
             lineCount = grid.size();
         }
 
-        Position move(Position position, int dx, int dy) {
-            return new Position((position.getX() + dx) % columnCount, position.getY() + dy);
+        Position move(Position position, Slope slope) {
+            return new Position((position.getX() + slope.getDx()) % columnCount, position.getY() + slope.getDy());
         }
 
         boolean canMove(Position position, int dy) {
@@ -71,8 +81,8 @@ public class Day3Puzzle1 {
     }
 
     static class Position {
-        private int x;
-        private int y;
+        private final int x;
+        private final int y;
 
         Position(int x, int y) {
             this.x = x;
@@ -93,6 +103,32 @@ public class Day3Puzzle1 {
 
         public int getY() {
             return y;
+        }
+    }
+
+    static class Slope {
+        private final int dx;
+        private final int dy;
+
+        Slope(int dx, int dy) {
+            this.dx = dx;
+            this.dy = dy;
+        }
+
+        public int getDx() {
+            return dx;
+        }
+
+        public int getDy() {
+            return dy;
+        }
+
+        @Override
+        public String toString() {
+            return "Slope{" +
+                  "dx=" + dx +
+                  ", dy=" + dy +
+                  '}';
         }
     }
 }
