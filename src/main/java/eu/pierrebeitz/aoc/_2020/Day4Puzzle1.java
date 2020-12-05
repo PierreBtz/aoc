@@ -6,15 +6,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 public class Day4Puzzle1 {
     private static final String SEPARATOR = "";
 
     public static void main(String[] args) throws IOException {
+        computeForValidator(new PasswordValidatorPuzzle1());
+    }
+
+    static void computeForValidator(Predicate<Password> passwordValidator) throws IOException {
         try (var reader = AocUtils.loadInputForDay(4)) {
             var count = buildPasswords(reader).stream()
-                  .filter(Password::isValid)
+                  .filter(passwordValidator)
                   .peek(System.err::println)
                   .count();
             System.out.println(count);
@@ -39,16 +44,16 @@ public class Day4Puzzle1 {
     }
 
     static class Password {
-        private static final Pattern PATTERN = Pattern.compile("(?<pid>pid:\\S+)|(?<byr>byr:\\S+)|(?<hgt>hgt:\\S+)|(?<iyr>iyr:\\S+)|(?<hcl>hcl:\\S+)|(?<eyr>eyr:\\S+)|(?<ecl>ecl:\\S+)|(?<cid>cid:\\S+)");
+        private static final Pattern PATTERN = Pattern.compile("pid:(?<pid>\\S+)|byr:(?<byr>\\S+)|hgt:(?<hgt>\\S+)|iyr:(?<iyr>\\S+)|hcl:(?<hcl>\\S+)|eyr:(?<eyr>\\S+)|ecl:(?<ecl>\\S+)|cid:(?<cid>\\S+)");
 
-        private final String ecl;
-        private final String pid;
-        private final String eyr;
-        private final String hcl;
-        private final String byr;
-        private final String iyr;
-        private final String cid;
-        private final String hgt;
+        final String ecl;
+        final String pid;
+        final String eyr;
+        final String hcl;
+        final String byr;
+        final String iyr;
+        final String cid;
+        final String hgt;
 
         Password(String ecl, String pid, String eyr, String hcl, String byr, String iyr, String cid, String hgt) {
             this.ecl = ecl;
@@ -99,10 +104,6 @@ public class Day4Puzzle1 {
             );
         }
 
-        public boolean isValid() {
-            return ecl != null && pid != null && eyr != null && hcl != null && byr != null && iyr != null && hgt != null;
-        }
-
         @Override
         public String toString() {
             return "Password{" +
@@ -115,6 +116,20 @@ public class Day4Puzzle1 {
                   ", cid='" + cid + '\'' +
                   ", hgt='" + hgt + '\'' +
                   '}';
+        }
+    }
+
+    private static class PasswordValidatorPuzzle1 implements Predicate<Password> {
+
+        @Override
+        public boolean test(Password password) {
+            return password.ecl != null
+                  && password.pid != null
+                  && password.eyr != null
+                  && password.hcl != null
+                  && password.byr != null
+                  && password.iyr != null
+                  && password.hgt != null;
         }
     }
 }
