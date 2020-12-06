@@ -3,14 +3,14 @@ package eu.pierrebeitz.aoc._2020;
 import eu.pierrebeitz.aoc.utils.AocUtils;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
+import static eu.pierrebeitz.aoc.utils.AocUtils.readByGroupAndMapToObject;
+
 public class Day4Puzzle1 {
-    private static final String SEPARATOR = "";
 
     public static void main(String[] args) throws IOException {
         computeForValidator(new PasswordValidatorPuzzle1());
@@ -27,20 +27,7 @@ public class Day4Puzzle1 {
     }
 
     private static List<Password> buildPasswords(java.io.BufferedReader reader) throws IOException {
-        var acc = "";
-        var result = new ArrayList<Password>();
-        while (reader.ready()) {
-            var currentLine = reader.readLine();
-            if (SEPARATOR.equals(currentLine)) {
-                result.add(Password.fromString(acc));
-                acc = "";
-            } else {
-                acc += currentLine + "\n";
-            }
-        }
-        // do not forget the last line...
-        result.add(Password.fromString(acc));
-        return result;
+        return readByGroupAndMapToObject(reader, Password::fromString);
     }
 
     static class Password {
