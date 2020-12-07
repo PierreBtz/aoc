@@ -5,11 +5,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Stream;
 
+import static eu.pierrebeitz.aoc._2020.Day7Puzzle1.BAG_OF_INTEREST;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Day7Puzzle1Test {
@@ -23,7 +23,7 @@ class Day7Puzzle1Test {
     @ParameterizedTest
     @MethodSource("generateDecomposeBagData")
     public void decomposeBag(Bag input, Map<String, Bag> map, Bag output) {
-        input.decomposeInto("shiny gold", map);
+        input.decomposeInto(BAG_OF_INTEREST, map);
         assertEquals(output, input);
     }
 

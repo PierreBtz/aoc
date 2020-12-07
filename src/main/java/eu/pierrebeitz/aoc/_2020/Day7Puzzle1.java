@@ -13,19 +13,23 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Day7Puzzle1 {
+    static final String BAG_OF_INTEREST = "shiny gold";
 
     public static void main(String[] args) throws IOException {
-        try (var reader = AocUtils.loadInputForDay(7)) {
-            var bags = reader.lines()
-                  .map(Bag::new)
-                  .collect(Collectors.toMap(Bag::getName, Function.identity()));
-            System.out.println(bags.values().stream()
-                  .peek(b -> b.decomposeInto("shiny gold", bags))
-                  .filter(b -> b.getNumberOf("shiny gold") > 0)
-                  .count());
-        }
+        var bags = buildBags();
+        System.out.println(bags.values().stream()
+              .peek(b -> b.decomposeInto(BAG_OF_INTEREST, bags))
+              .filter(b -> b.getNumberOf(BAG_OF_INTEREST) > 0)
+              .count());
     }
 
+    static Map<String, Bag> buildBags() throws IOException {
+        try (var reader = AocUtils.loadInputForDay(7)) {
+            return reader.lines()
+                  .map(Bag::new)
+                  .collect(Collectors.toMap(Bag::getName, Function.identity()));
+        }
+    }
 
     static class Bag {
         private static final Pattern BAG_ENTRY_PATTERN = Pattern.compile("(?<bagName>\\D+) bags contain (?<contains>.*)\\.");
@@ -64,7 +68,7 @@ public class Day7Puzzle1 {
         }
 
         public void decomposeInto(String bagName, Map<String, Bag> bags) {
-            System.out.println(this);
+            System.err.println(this);
             if (!content.isEmpty()) {
                 var numberOfBagName = getNumberOf(bagName);
                 for (var it = content.keySet().iterator(); it.hasNext(); ) {
@@ -76,10 +80,28 @@ public class Day7Puzzle1 {
                         numberOfBagName += bagToDecompose.getNumberOf(bagName) * getNumberOf(bagToDecompose.name);
                         it.remove();
                     }
-                    System.out.println(this);
+                    System.err.println(this);
                 }
                 content.put(bagName, numberOfBagName);
             }
+        }
+
+        public int countNumberofPrimeBags(Map<String, Bag> bags) {
+            // this is not the most elegant but with this algorithm we need to remove one bag (which is this itself)
+            return internalCountNumberOfPrimeBags(bags) - 1;
+        }
+
+        private int internalCountNumberOfPrimeBags(Map<String, Bag> bags) {
+            System.err.println(this);
+            var result = 1;
+            if (!content.isEmpty()) {
+                for (var it = content.keySet().iterator(); it.hasNext(); ) {
+                    var key = it.next();
+                    var bagToDecompose = bags.get(key);
+                    result += bagToDecompose.internalCountNumberOfPrimeBags(bags) * getNumberOf(bagToDecompose.name);
+                }
+            }
+            return result;
         }
 
         public int getNumberOf(String bagName) {
