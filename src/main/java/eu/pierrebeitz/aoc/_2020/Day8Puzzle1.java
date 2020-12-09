@@ -4,7 +4,9 @@ import eu.pierrebeitz.aoc.utils.AocUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -27,11 +29,12 @@ public class Day8Puzzle1 {
     }
 
     static class Runtime {
-        private static final Pattern INSTRUCTION_PATTERN = Pattern.compile("(?<operation>nop|acc|jmp) (?<arg>[\\+|-]\\d+)");
+        private static final Pattern INSTRUCTION_PATTERN = Pattern.compile("(?<operation>nop|acc|jmp) (?<arg>[+|-]\\d+)");
 
-        private List<Instruction> instructions;
+        private final List<Instruction> instructions;
         private int accumulator;
         private int current;
+        private boolean mutant;
 
         Runtime(BufferedReader reader) {
             instructions = reader.lines()
@@ -41,8 +44,19 @@ public class Day8Puzzle1 {
                   .collect(Collectors.toList());
         }
 
+        private Runtime(List<Instruction> instructions, int current, int accumulator) {
+            this.instructions = new ArrayList<>(instructions);
+            this.current = current;
+            this.accumulator = accumulator;
+            mutant = true;
+        }
+
         boolean hasNext() {
             return current < instructions.size() && instructions.get(current) != null;
+        }
+
+        boolean isComplete() {
+            return current == instructions.size();
         }
 
         void executeNext() {
@@ -63,6 +77,16 @@ public class Day8Puzzle1 {
                     current++;
                     break;
             }
+        }
+
+        Optional<Runtime> mutate() {
+            var currentInstruction = instructions.get(current);
+            if (Operation.acc == currentInstruction.getOperation() || mutant) {
+                return Optional.empty();
+            }
+            var mutatedInstructions = new ArrayList<>(instructions);
+            mutatedInstructions.set(current, currentInstruction.mutate());
+            return Optional.of(new Runtime(mutatedInstructions, current, accumulator));
         }
 
         @Override
@@ -94,6 +118,11 @@ public class Day8Puzzle1 {
 
         public int getArg() {
             return arg;
+        }
+
+        public Instruction mutate() {
+            var mutatedInstruction = operation == Operation.jmp ? Operation.nop : Operation.jmp;
+            return new Instruction(mutatedInstruction.name(), arg);
         }
 
         @Override
