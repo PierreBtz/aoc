@@ -37,4 +37,29 @@ class AocUtilsTest {
               new InputStreamReader(AocUtilsTest.class.getResourceAsStream("/eu/pierrebeitz/aoc/utils/" + resource)));
     }
 
+    @ParameterizedTest
+    @MethodSource("generateCombinationsOfData")
+    public void combinationsOf(List<Integer> input, List<List<Integer>> output) {
+        Assertions.assertEquals(output, AocUtils.combinationsOf(input));
+    }
+
+    private static Stream<Arguments> generateCombinationsOfData() {
+        return Stream.of(
+              // test tests the exact output which we don't really care
+              // proper thing would be to return tupples instead of lists but this is overkill for our problem
+              Arguments.of(Arrays.asList(0, 1, 2, 3, 4), Arrays.asList(
+                    Arrays.asList(3, 4),
+                    Arrays.asList(2, 4),
+                    Arrays.asList(2, 3),
+                    Arrays.asList(1, 4),
+                    Arrays.asList(1, 3),
+                    Arrays.asList(1, 2),
+                    Arrays.asList(0, 4),
+                    Arrays.asList(0, 3),
+                    Arrays.asList(0, 2),
+                    Arrays.asList(0, 1)
+              ))
+        );
+    }
+
 }
