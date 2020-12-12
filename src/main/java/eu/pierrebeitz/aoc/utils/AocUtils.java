@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
@@ -35,5 +36,22 @@ public enum AocUtils {
         // do not forget the last line...
         result.add(mapper.apply(acc));
         return result;
+    }
+
+    public static <T> List<List<T>> combinationsOf(List<T> list) {
+        List<List<T>> combinations = new ArrayList<>();
+        combination(combinations, new ArrayList<>(), list, 0, list.size() - 1);
+        return combinations;
+    }
+
+    // simple version for 2 elements but support for k can easily added if a future puzzle needs it
+    private static <T> void combination(List<List<T>> combinations, List<T> currentCombination, List<T> source, int start, int end) {
+        if (2 == currentCombination.size()) {
+            combinations.add(currentCombination);
+        } else if (start <= end) {
+            combination(combinations, new ArrayList<>(currentCombination), source, start + 1, end);
+            currentCombination.addAll(Collections.singletonList(source.get(start)));
+            combination(combinations, currentCombination, source, start + 1, end);
+        }
     }
 }
