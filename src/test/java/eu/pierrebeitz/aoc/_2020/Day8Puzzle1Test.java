@@ -2,29 +2,20 @@ package eu.pierrebeitz.aoc._2020;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 import static eu.pierrebeitz.aoc._2020.Day8Puzzle1.loadAndExecute;
+import static eu.pierrebeitz.aoc.utils.AocUtils.loadInputForDay;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class Day8Puzzle1Test {
 
     @Test
     public void testExample() throws IOException {
-        try (var reader = loadTestData()) {
+        try (var reader = loadInputForDay(8)) {
             var runtime = loadAndExecute(reader);
             assertEquals(5, runtime.getAccumulator());
         }
-    }
-
-    public static BufferedReader loadTestData() {
-        return new BufferedReader(
-              new InputStreamReader(
-                    Day8Puzzle1Test.class.getResourceAsStream("/eu/pierrebeitz/aoc/_2020/day8-example.txt")
-              )
-        );
     }
 
 }
