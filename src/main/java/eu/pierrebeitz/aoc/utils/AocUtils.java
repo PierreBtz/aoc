@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
@@ -14,11 +15,17 @@ public enum AocUtils {
     private static final String SEPARATOR = "";
 
     public static BufferedReader loadInputForDay(int day) {
+        var resourcePath = "/eu/pierrebeitz/aoc/_2020/input-" + (isJunit() ? "example-" : "") + "day" + day + ".txt";
         return new BufferedReader(
               new InputStreamReader(
-                    AocUtils.class.getResourceAsStream("/eu/pierrebeitz/aoc/_2020/input-day" + day + ".txt")
+                    AocUtils.class.getResourceAsStream(resourcePath)
               )
         );
+    }
+
+    private static boolean isJunit() {
+        return Arrays.stream(Thread.currentThread().getStackTrace())
+              .anyMatch(e -> e.getClassName().startsWith("org.junit"));
     }
 
     public static <T> List<T> readByGroupAndMapToObject(BufferedReader reader, Function<String, T> mapper) throws IOException {
