@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class Day8Puzzle1 {
 
     public static void main(String[] args) throws IOException {
-        try (var reader = AocUtils.loadInputForDay(8)) {
+        try (var reader = AocUtils.loadInputForDay(2020, 8)) {
             var runtime = loadAndExecute(reader);
             System.out.println(runtime.getAccumulator());
         }

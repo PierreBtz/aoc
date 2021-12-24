@@ -19,7 +19,7 @@ public class Day3Puzzle2 {
     );
 
     public static void main(String[] args) throws IOException {
-        try (var reader = AocUtils.loadInputForDay(3)) {
+        try (var reader = AocUtils.loadInputForDay(2020, 3)) {
             var map = new Map(reader.lines());
             var result = slopes.stream()
                   .map(slope -> new Environment(map, slope))

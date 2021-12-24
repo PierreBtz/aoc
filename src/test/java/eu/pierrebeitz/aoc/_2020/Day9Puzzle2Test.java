@@ -12,7 +12,7 @@ class Day9Puzzle2Test {
 
     @Test
     public void testExample() throws IOException {
-        try (var reader = loadInputForDay(9)) {
+        try (var reader = loadInputForDay(2020, 9)) {
             var xmasSequence = fromStream(reader.lines());
             xmasSequence.setPreambleSize(5);
             assertEquals(62, xmasSequence.findWeakness());

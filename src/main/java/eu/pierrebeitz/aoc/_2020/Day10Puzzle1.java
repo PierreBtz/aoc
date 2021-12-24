@@ -10,7 +10,7 @@ import static eu.pierrebeitz.aoc.utils.AocUtils.loadInputForDay;
 public class Day10Puzzle1 {
 
     public static void main(String[] args) throws IOException {
-        try (var reader = loadInputForDay(10)) {
+        try (var reader = loadInputForDay(2020, 10)) {
             System.out.println(solve(reader.lines()));
         }
     }

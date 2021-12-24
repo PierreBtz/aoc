@@ -15,7 +15,7 @@ public class Day6Puzzle1 {
     }
 
     static void computeCount(Function<String, Group> groupBuilder) throws IOException {
-        try (var reader = AocUtils.loadInputForDay(6)) {
+        try (var reader = AocUtils.loadInputForDay(2020, 6)) {
             var count = AocUtils.readByGroupAndMapToObject(reader, groupBuilder).stream()
                   .peek(System.err::println)
                   .map(Group::getQuestionCount)

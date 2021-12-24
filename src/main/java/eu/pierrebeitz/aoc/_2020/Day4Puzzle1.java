@@ -17,7 +17,7 @@ public class Day4Puzzle1 {
     }
 
     static void computeForValidator(Predicate<Password> passwordValidator) throws IOException {
-        try (var reader = AocUtils.loadInputForDay(4)) {
+        try (var reader = AocUtils.loadInputForDay(2020, 4)) {
             var count = buildPasswords(reader).stream()
                   .filter(passwordValidator)
                   .peek(System.err::println)

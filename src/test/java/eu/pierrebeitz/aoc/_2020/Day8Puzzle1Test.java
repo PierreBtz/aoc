@@ -12,7 +12,7 @@ class Day8Puzzle1Test {
 
     @Test
     public void testExample() throws IOException {
-        try (var reader = loadInputForDay(8)) {
+        try (var reader = loadInputForDay(2020, 8)) {
             var runtime = loadAndExecute(reader);
             assertEquals(5, runtime.getAccumulator());
         }

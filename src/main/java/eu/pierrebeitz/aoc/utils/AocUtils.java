@@ -14,8 +14,8 @@ public enum AocUtils {
 
     private static final String SEPARATOR = "";
 
-    public static BufferedReader loadInputForDay(int day) {
-        var resourcePath = "/eu/pierrebeitz/aoc/_2020/input-" + (isJunit() ? "example-" : "") + "day" + day + ".txt";
+    public static BufferedReader loadInputForDay(int year, int day) {
+        var resourcePath = "/eu/pierrebeitz/aoc/_" + year + "/input-" + (isJunit() ? "example-" : "") + "day" + day + ".txt";
         return new BufferedReader(
               new InputStreamReader(
                     AocUtils.class.getResourceAsStream(resourcePath)

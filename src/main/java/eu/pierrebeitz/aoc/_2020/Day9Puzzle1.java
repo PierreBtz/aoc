@@ -14,7 +14,7 @@ import static eu.pierrebeitz.aoc.utils.AocUtils.loadInputForDay;
 public class Day9Puzzle1 {
 
     public static void main(String[] args) throws IOException {
-        try (var reader = loadInputForDay(9)) {
+        try (var reader = loadInputForDay(2020, 9)) {
             var maybeInvalid = XmasSequence.fromStream(reader.lines()).validateSequence();
             maybeInvalid.ifPresent(System.out::println);
         }
