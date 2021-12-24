@@ -10,7 +10,7 @@ public class Day1Puzzle1 {
 
     public static void main(String[] args) throws IOException {
         //let's go simple, given the number of inputs n2 is acceptable
-        try (var reader = AocUtils.loadInputForDay(1)) {
+        try (var reader = AocUtils.loadInputForDay(2020, 1)) {
             var expenses = reader.lines()
                   .map(Integer::valueOf)
                   .collect(Collectors.toList());

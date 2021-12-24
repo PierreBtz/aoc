@@ -7,7 +7,7 @@ import java.io.IOException;
 public class Day2Puzzle2 {
 
     public static void main(String[] args) throws IOException {
-        try (var reader = AocUtils.loadInputForDay(2)) {
+        try (var reader = AocUtils.loadInputForDay(2020, 2)) {
             var result = reader.lines()
                   .map(RecordPuzzle2::new)
                   .filter(RecordPuzzle2::isValid)

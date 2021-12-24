@@ -11,7 +11,7 @@ import java.util.concurrent.RecursiveTask;
 public class Day8Puzzle2 {
 
     public static void main(String[] args) throws IOException {
-        try (var reader = AocUtils.loadInputForDay(8)) {
+        try (var reader = AocUtils.loadInputForDay(2020, 8)) {
             loadAndExecute(reader);
         }
     }

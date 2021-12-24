@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class Day2Puzzle1 {
 
     public static void main(String[] args) throws IOException {
-        try (var reader = AocUtils.loadInputForDay(2)) {
+        try (var reader = AocUtils.loadInputForDay(2020, 2)) {
             var result = reader.lines()
                   .map(RecordPuzzle1::new)
                   .filter(RecordPuzzle1::isValid)

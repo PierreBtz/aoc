@@ -11,7 +11,7 @@ public class Day3Puzzle1 {
     private static final Slope SLOPE = new Slope(3, 1);
 
     public static void main(String[] args) throws IOException {
-        try (var reader = AocUtils.loadInputForDay(3)) {
+        try (var reader = AocUtils.loadInputForDay(2020, 3)) {
             var env = new Environment(reader.lines(), SLOPE);
             System.out.println(env.computeTreeCount());
         }

@@ -11,7 +11,7 @@ class Day10Puzzle1Test {
 
     @Test
     public void testExample() throws IOException {
-        try (var reader = loadInputForDay(10)) {
+        try (var reader = loadInputForDay(2020, 10)) {
             var result = Day10Puzzle1.solve(reader.lines());
             assertEquals(220, result);
         }

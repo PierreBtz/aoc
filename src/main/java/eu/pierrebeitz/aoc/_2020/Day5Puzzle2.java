@@ -12,7 +12,7 @@ import static java.util.stream.Collectors.summarizingInt;
 public class Day5Puzzle2 {
 
     public static void main(String[] args) throws IOException {
-        try (var reader = AocUtils.loadInputForDay(5)) {
+        try (var reader = AocUtils.loadInputForDay(2020, 5)) {
             var ids = reader.lines()
                   .map(Seat::fromString)
                   .map(Seat::getId)

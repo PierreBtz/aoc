@@ -24,7 +24,7 @@ public class Day7Puzzle1 {
     }
 
     static Map<String, Bag> buildBags() throws IOException {
-        try (var reader = AocUtils.loadInputForDay(7)) {
+        try (var reader = AocUtils.loadInputForDay(2020, 7)) {
             return reader.lines()
                   .map(Bag::new)
                   .collect(Collectors.toMap(Bag::getName, Function.identity()));

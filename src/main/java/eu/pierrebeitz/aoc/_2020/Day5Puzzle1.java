@@ -7,7 +7,7 @@ import java.io.IOException;
 public class Day5Puzzle1 {
 
     public static void main(String[] args) throws IOException {
-        try (var reader = AocUtils.loadInputForDay(5)) {
+        try (var reader = AocUtils.loadInputForDay(2020, 5)) {
             System.out.println(reader.lines()
                   .map(Seat::fromString)
                   .map(Seat::getId)
