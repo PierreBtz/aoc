@@ -25,14 +25,16 @@ public class AocTestExtension implements ParameterResolver {
             throw new ExtensionConfigurationException("Extension only provides BufferedReader");
         }
         var testClass = extensionContext.getRequiredTestClass();
-        var packagePattern = Pattern.compile("eu.pierrebeitz.aoc._(?<year>\\d\\d\\d\\d).Day(?<day>\\d).*");
+        var packagePattern = Pattern.compile("eu.pierrebeitz.aoc._(?<year>\\d\\d\\d\\d).Day(?<day>\\d)Puzzle(?<puzzle>\\d).*");
         var match = packagePattern.matcher(testClass.getName());
         if (match.matches()) {
             var year = match.group("year");
             var day = match.group("day");
-            var resourcePath = String.format("/eu/pierrebeitz/aoc/_%s/input-example-day%s.txt",
+            var puzzle = match.group("puzzle");
+            var resourcePath = String.format("/eu/pierrebeitz/aoc/_%s/input-example-day%s-puzzle%s.txt",
                     year,
-                    day
+                    day,
+                    puzzle
             );
             var is = AocUtils.class.getResourceAsStream(resourcePath);
             if (is != null) {

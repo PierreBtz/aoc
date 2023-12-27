@@ -25,6 +25,7 @@ public class Loader {
         this.puzzle = puzzle;
     }
 
+    @SuppressWarnings("rawtypes")
     public void load() throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, IOException, InterruptedException, ClassNotFoundException {
         String className = String.format("eu.pierrebeitz.aoc._%s.Day%sPuzzle%s", year, day, puzzle);
         var clasz = Loader.class.getClassLoader().loadClass(className);
