@@ -3,7 +3,7 @@ package eu.pierrebeitz.aoc.utils;
 import java.io.BufferedReader;
 
 @FunctionalInterface
-public interface DayPuzzle {
+public interface DayPuzzle<T> {
 
-    String solve(BufferedReader reader);
+    T solve(BufferedReader reader);
 }
