@@ -14,7 +14,7 @@ public enum AocUtils {
 
     private static final String SEPARATOR = "";
 
-    // use the Loader class
+    // use the Loader class all the calls to this methods will now fail since the resources have been scrubbed from the repo
     @Deprecated
     public static BufferedReader loadInputForDay(int year, int day) {
         var resourcePath = "/eu/pierrebeitz/aoc/_" + year + "/input-" + (isJunit() ? "example-" : "") + "day" + day + ".txt";
