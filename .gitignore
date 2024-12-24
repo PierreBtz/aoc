@@ -1,4 +1,4 @@
 /aoc.iml
 /.idea/
-/target/
+**/target/
 .data

@@ -2,7 +2,8 @@ version: "3"
 
 vars:
   VERSION: "1.0-SNAPSHOT"
-  JAR_FILE: "target/aoc-{{.VERSION}}-jar-with-dependencies.jar"
+  SOLVER_JAR_FILE: "solver/target/aoc-solver-{{.VERSION}}-jar-with-dependencies.jar"
+  GENERATOR_JAR_FILE: "generator/target/aoc-generator-{{.VERSION}}-jar-with-dependencies.jar"
 
 tasks:
   build:
@@ -10,9 +11,9 @@ tasks:
     cmds:
       - mvn verify
   quick-build:
-    desc: Build the project without executing the tests
+    desc: Build the solver without executing the tests
     cmds:
-      - mvn package -DskipTests
+      - mvn -pl solver package -DskipTests
     generates:
       - "{{.JAR_FILE}}"
   run-day-*-*-*:
@@ -24,7 +25,7 @@ tasks:
     deps:
       - quick-build
     cmds:
-      - java -jar {{.JAR_FILE}} {{.YEAR}} {{.DAY}} {{.PART}}
+      - java -jar {{.SOLVER_JAR_FILE}} {{.YEAR}} {{.DAY}} {{.PART}}
   run-test-*-*-*:
     desc: Runt the tests for a given day/part
     vars:
@@ -33,3 +34,12 @@ tasks:
       PART: "{{index .MATCH 2}}"
     cmds:
       - mvn test -Dtest=eu.pierrebeitz.aoc._{{.YEAR}}.Day{{.DAY}}Puzzle{{.PART}}Test
+  generate-day-*-*-*-*:
+    desc: Generate the day's puzzle
+    vars:
+      YEAR: "{{index .MATCH 0}}"
+      DAY: "{{index .MATCH 1}}"
+      PART: "{{index .MATCH 2}}"
+      OUTPUT: "{{index .MATCH 3}}"
+    cmds:
+      - java -jar {{.GENERATOR_JAR_FILE}} --year {{.YEAR}} --day {{.DAY}} --part {{.PART}} --output {{.OUTPUT}}
