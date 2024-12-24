@@ -10,6 +10,10 @@ tasks:
     desc: Build the project
     cmds:
       - mvn verify
+  install:
+    desc: Install the project to use the solve
+    cmds:
+      - mvn install
   quick-build:
     desc: Build the solver without executing the tests
     cmds:
@@ -17,6 +21,8 @@ tasks:
     generates:
       - "{{.JAR_FILE}}"
   run-day-*-*-*:
+    dotenv:
+      - .env
     desc: Run the solver for a given day/part
     vars:
       YEAR: "{{index .MATCH 0}}"
