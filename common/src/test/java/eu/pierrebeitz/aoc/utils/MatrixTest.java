@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class MatrixTest {
 
@@ -64,6 +65,29 @@ class MatrixTest {
         var node = matrix.getAt(1, 3);
         var neighbours = matrix.getNeighbours(node);
         assertEquals(5, neighbours.size());
+    }
+
+    @Test
+    void inDirection() {
+        var input = """
+                467..114..
+                ...*......
+                ..35..633.
+                ......#...
+                617*......
+                .....+.58.
+                ..592.....
+                ......755.
+                ...$.*....
+                .664.598..
+                """;
+
+        var reader = new BufferedReader(new StringReader(input));
+        var matrix = new Matrix(reader);
+
+        assertEquals('6', matrix.getInDirection(0, 0, Matrix.Direction.E).getValue());
+        assertEquals('.', matrix.getInDirection(0, 0, Matrix.Direction.S).getValue());
+        assertNull(matrix.getInDirection(0, 0, Matrix.Direction.W));
     }
 
 }
