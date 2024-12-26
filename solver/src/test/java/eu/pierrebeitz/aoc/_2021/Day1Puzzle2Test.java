@@ -1,12 +1,11 @@
 package eu.pierrebeitz.aoc._2021;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
-
 import static eu.pierrebeitz.aoc._2021.Day1Puzzle2.compute;
 import static eu.pierrebeitz.aoc.utils.AocUtils.loadInputForDay;
+
+import java.io.IOException;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class Day1Puzzle2Test {
 

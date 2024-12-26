@@ -1,7 +1,6 @@
 package eu.pierrebeitz.aoc._2023;
 
 import eu.pierrebeitz.aoc.utils.DayPuzzle;
-
 import java.io.BufferedReader;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,11 +42,7 @@ public class Day4Puzzle2 implements DayPuzzle<Integer> {
         }
 
         int result() {
-            return map.values().stream()
-                    .mapToInt(i -> i)
-                    .sum();
+            return map.values().stream().mapToInt(i -> i).sum();
         }
     }
-
-
 }

@@ -1,7 +1,6 @@
 package eu.pierrebeitz.aoc._2020;
 
 import eu.pierrebeitz.aoc.utils.AocUtils;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,21 +17,20 @@ public class Day7Puzzle1 {
     public static void main(String[] args) throws IOException {
         var bags = buildBags();
         System.out.println(bags.values().stream()
-              .peek(b -> b.decomposeInto(BAG_OF_INTEREST, bags))
-              .filter(b -> b.getNumberOf(BAG_OF_INTEREST) > 0)
-              .count());
+                .peek(b -> b.decomposeInto(BAG_OF_INTEREST, bags))
+                .filter(b -> b.getNumberOf(BAG_OF_INTEREST) > 0)
+                .count());
     }
 
     static Map<String, Bag> buildBags() throws IOException {
         try (var reader = AocUtils.loadInputForDay(2020, 7)) {
-            return reader.lines()
-                  .map(Bag::new)
-                  .collect(Collectors.toMap(Bag::getName, Function.identity()));
+            return reader.lines().map(Bag::new).collect(Collectors.toMap(Bag::getName, Function.identity()));
         }
     }
 
     static class Bag {
-        private static final Pattern BAG_ENTRY_PATTERN = Pattern.compile("(?<bagName>\\D+) bags contain (?<contains>.*)\\.");
+        private static final Pattern BAG_ENTRY_PATTERN =
+                Pattern.compile("(?<bagName>\\D+) bags contain (?<contains>.*)\\.");
         private static final Pattern BAG_CONTENT_PATTERN = Pattern.compile("(\\d)+ (.*)bag[s]*");
         private static final String EMPTY_BAG = "no other bags";
 
@@ -48,10 +46,10 @@ public class Day7Puzzle1 {
                     content = new HashMap<>();
                 } else {
                     content = Stream.of(c.split(","))
-                          .map(String::trim) // just to be sure as we are basing everything on the bag name
-                          .map(BAG_CONTENT_PATTERN::matcher)
-                          .peek(Matcher::matches)
-                          .collect(Collectors.toMap(m -> m.group(2).trim(), m -> Integer.valueOf(m.group(1))));
+                            .map(String::trim) // just to be sure as we are basing everything on the bag name
+                            .map(BAG_CONTENT_PATTERN::matcher)
+                            .peek(Matcher::matches)
+                            .collect(Collectors.toMap(m -> m.group(2).trim(), m -> Integer.valueOf(m.group(1))));
                 }
             } else {
                 throw new UnsupportedOperationException("Something went wrong with entry " + bagEntry);
@@ -110,10 +108,7 @@ public class Day7Puzzle1 {
 
         @Override
         public String toString() {
-            return "Bag{" +
-                  "content=" + content +
-                  ", name='" + name + '\'' +
-                  '}';
+            return "Bag{" + "content=" + content + ", name='" + name + '\'' + '}';
         }
 
         @Override

@@ -1,7 +1,6 @@
 package eu.pierrebeitz.aoc._2020;
 
 import eu.pierrebeitz.aoc.utils.AocUtils;
-
 import java.io.IOException;
 
 public class Day5Puzzle1 {
@@ -9,11 +8,11 @@ public class Day5Puzzle1 {
     public static void main(String[] args) throws IOException {
         try (var reader = AocUtils.loadInputForDay(2020, 5)) {
             System.out.println(reader.lines()
-                  .map(Seat::fromString)
-                  .map(Seat::getId)
-                  .mapToInt(i -> i)
-                  .max()
-                  .orElse(-1));
+                    .map(Seat::fromString)
+                    .map(Seat::getId)
+                    .mapToInt(i -> i)
+                    .max()
+                    .orElse(-1));
         }
     }
 

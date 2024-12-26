@@ -1,7 +1,6 @@
 package eu.pierrebeitz.aoc._2023;
 
 import eu.pierrebeitz.aoc.utils.DayPuzzle;
-
 import java.io.BufferedReader;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -21,7 +20,8 @@ public class Day4Puzzle1 implements DayPuzzle<Double> {
     }
 
     record Card(int id, Set<Integer> winningNumbers, Set<Integer> numbers) implements Comparable<Card> {
-        private static final Pattern CARD_PATTERN = Pattern.compile("^Card .*?(?<id>\\d+): (?<winning>.*) \\| (?<numbers>.*)");
+        private static final Pattern CARD_PATTERN =
+                Pattern.compile("^Card .*?(?<id>\\d+): (?<winning>.*) \\| (?<numbers>.*)");
 
         static Card fromString(String str) {
             var matcher = CARD_PATTERN.matcher(str);
@@ -60,5 +60,4 @@ public class Day4Puzzle1 implements DayPuzzle<Double> {
             return id - o.id;
         }
     }
-
 }

@@ -1,13 +1,13 @@
 package eu.pierrebeitz.aoc._2024;
 
 import eu.pierrebeitz.aoc.utils.DayPuzzle;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.regex.Pattern;
 
 public class Day3Puzzle2 implements DayPuzzle<Integer> {
-    private static final Pattern PATTERN = Pattern.compile("(?<mul>mul\\((?<operand1>\\d{1,3}),(?<operand2>\\d{1,3})\\))|(?<do>do\\(\\))|(?<dont>don't\\(\\))");
+    private static final Pattern PATTERN = Pattern.compile(
+            "(?<mul>mul\\((?<operand1>\\d{1,3}),(?<operand2>\\d{1,3})\\))|(?<do>do\\(\\))|(?<dont>don't\\(\\))");
 
     @Override
     public Integer solve(BufferedReader reader) {

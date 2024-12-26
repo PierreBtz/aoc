@@ -2,7 +2,6 @@ package eu.pierrebeitz.aoc._2023;
 
 import eu.pierrebeitz.aoc.utils.DayPuzzle;
 import eu.pierrebeitz.aoc.utils.Matrix;
-
 import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,9 +40,7 @@ public class Day3Puzzle1 implements DayPuzzle<Integer> {
                 currentValue = "";
             }
         }
-        return numbersToKeep.stream()
-                .mapToInt(Integer::parseInt)
-                .sum();
+        return numbersToKeep.stream().mapToInt(Integer::parseInt).sum();
     }
 
     private static boolean hasValidSymbol(List<Matrix.Node> nodes) {

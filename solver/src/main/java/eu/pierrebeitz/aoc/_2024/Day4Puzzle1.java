@@ -2,7 +2,6 @@ package eu.pierrebeitz.aoc._2024;
 
 import eu.pierrebeitz.aoc.utils.DayPuzzle;
 import eu.pierrebeitz.aoc.utils.Matrix;
-
 import java.io.BufferedReader;
 import java.util.LinkedList;
 import java.util.List;
@@ -56,7 +55,8 @@ public class Day4Puzzle1 implements DayPuzzle<Integer> {
             if (node.getValue() != currentChar) {
                 return false;
             }
-            return iterateInDirection(row + direction.getDeltaRow(), column + direction.getDeltaColumn(), direction, expected);
+            return iterateInDirection(
+                    row + direction.getDeltaRow(), column + direction.getDeltaColumn(), direction, expected);
         }
     }
 }

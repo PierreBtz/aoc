@@ -1,6 +1,5 @@
 package eu.pierrebeitz.aoc.utils;
 
-
 import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -55,9 +54,7 @@ public class Matrix implements Iterable<Matrix.Node> {
         neighbourgs.add(getInDirection(row, col, Direction.S));
         neighbourgs.add(getInDirection(row, col, Direction.SE));
 
-        return neighbourgs.stream()
-                .filter(Objects::nonNull)
-                .toList();
+        return neighbourgs.stream().filter(Objects::nonNull).toList();
     }
 
     public Node getAt(int row, int column) {
@@ -88,10 +85,8 @@ public class Matrix implements Iterable<Matrix.Node> {
         }
 
         // let's also reject matrix with different column sizes
-        var rowSizes = matrix.stream()
-                .map(List::size)
-                .collect(Collectors.toSet())
-                .size();
+        var rowSizes =
+                matrix.stream().map(List::size).collect(Collectors.toSet()).size();
         if (rowSizes != 1) {
             throw new UnsupportedOperationException("Matrix only supports rows with the same sizes");
         }

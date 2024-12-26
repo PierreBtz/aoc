@@ -8,12 +8,11 @@ import com.palantir.javapoet.ParameterizedTypeName;
 import com.palantir.javapoet.TypeSpec;
 import eu.pierrebeitz.aoc.utils.DayPuzzle;
 import eu.pierrebeitz.aoc.utils.TestData;
-import org.junit.jupiter.api.Test;
-
-import javax.lang.model.element.Modifier;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Path;
+import javax.lang.model.element.Modifier;
+import org.junit.jupiter.api.Test;
 
 public class Generator {
     public static final String AOC_GENERATOR_BASE_DIR = "aoc.generator.baseDir";
@@ -36,12 +35,8 @@ public class Generator {
     }
 
     Path generateTestResources() throws IOException {
-        var resourceDir =
-                getBaseDirectory()
-                        .resolve(
-                                Path.of("solver", "src", "test", "resources", "eu", "pierrebeitz", "aoc", "_" + year
-                                )
-                        );
+        var resourceDir = getBaseDirectory()
+                .resolve(Path.of("solver", "src", "test", "resources", "eu", "pierrebeitz", "aoc", "_" + year));
         var created = resourceDir.toFile().mkdirs();
         if (!created) {
             System.out.printf("Could not create the resource directory %s, maybe it already exits?%n", resourceDir);
@@ -61,28 +56,19 @@ public class Generator {
 
         var testMethodBuilder = MethodSpec.methodBuilder("testExample");
         testMethodBuilder.addAnnotation(Test.class);
-        testMethodBuilder.addParameter(
-                ParameterSpec.builder(BufferedReader.class, "reader")
-                        .addAnnotation(TestData.class)
-                        .build()
-        );
-        testMethodBuilder.addStatement("assertEquals(/*TODO*/, new $T().solve(reader))", ClassName.get(generatePackageName(), generateClassName()));
+        testMethodBuilder.addParameter(ParameterSpec.builder(BufferedReader.class, "reader")
+                .addAnnotation(TestData.class)
+                .build());
+        testMethodBuilder.addStatement(
+                "assertEquals(/*TODO*/, new $T().solve(reader))",
+                ClassName.get(generatePackageName(), generateClassName()));
         typeBuilder.addMethod(testMethodBuilder.build());
 
         var generatedFilePath = JavaFile.builder(generatePackageName(), typeBuilder.build())
                 .addStaticImport(org.junit.jupiter.api.Assertions.class, "assertEquals")
                 .build()
                 // strong assumption that we execute this from the root of the repo through the task file, KISS...
-                .writeToPath(
-                        getBaseDirectory()
-                                .resolve(
-                                        Path.of(
-                                                "solver",
-                                                "src",
-                                                "test",
-                                                "java"
-                                        ))
-                );
+                .writeToPath(getBaseDirectory().resolve(Path.of("solver", "src", "test", "java")));
 
         System.out.printf("Generated test file at %s%n", generatedFilePath);
         return generatedFilePath;
@@ -108,15 +94,7 @@ public class Generator {
         var generatedFilePath = JavaFile.builder(generatePackageName(), type)
                 .build()
                 // strong assumption that we execute this from the root of the repo through the task file, KISS...
-                .writeToPath(getBaseDirectory()
-                        .resolve(
-                                Path.of(
-                                        "solver",
-                                        "src",
-                                        "main",
-                                        "java")
-                        )
-                );
+                .writeToPath(getBaseDirectory().resolve(Path.of("solver", "src", "main", "java")));
         System.out.printf("Generated production file at %s%n", generatedFilePath);
         return generatedFilePath;
     }
@@ -126,11 +104,7 @@ public class Generator {
     }
 
     private String generateClassName() {
-        return String.format(
-                "Day%dPuzzle%d",
-                day,
-                part
-        );
+        return String.format("Day%dPuzzle%d", day, part);
     }
 
     private Path getBaseDirectory() {

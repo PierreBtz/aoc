@@ -1,7 +1,6 @@
 package eu.pierrebeitz.aoc._2020;
 
 import eu.pierrebeitz.aoc.utils.AocUtils;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,7 +28,8 @@ public class Day8Puzzle1 {
     }
 
     static class Runtime {
-        private static final Pattern INSTRUCTION_PATTERN = Pattern.compile("(?<operation>nop|acc|jmp) (?<arg>[+|-]\\d+)");
+        private static final Pattern INSTRUCTION_PATTERN =
+                Pattern.compile("(?<operation>nop|acc|jmp) (?<arg>[+|-]\\d+)");
 
         private final List<Instruction> instructions;
         private int accumulator;
@@ -38,10 +38,10 @@ public class Day8Puzzle1 {
 
         Runtime(BufferedReader reader) {
             instructions = reader.lines()
-                  .map(INSTRUCTION_PATTERN::matcher)
-                  .peek(Matcher::matches)
-                  .map(mapper -> new Instruction(mapper.group("operation"), Integer.parseInt(mapper.group("arg"))))
-                  .collect(Collectors.toList());
+                    .map(INSTRUCTION_PATTERN::matcher)
+                    .peek(Matcher::matches)
+                    .map(mapper -> new Instruction(mapper.group("operation"), Integer.parseInt(mapper.group("arg"))))
+                    .collect(Collectors.toList());
         }
 
         private Runtime(List<Instruction> instructions, int current, int accumulator) {
@@ -91,11 +91,10 @@ public class Day8Puzzle1 {
 
         @Override
         public String toString() {
-            return "Runtime{" +
-                  "instructions=" + instructions +
-                  ", accumulator=" + accumulator +
-                  ", current=" + current +
-                  '}';
+            return "Runtime{" + "instructions="
+                    + instructions + ", accumulator="
+                    + accumulator + ", current="
+                    + current + '}';
         }
 
         int getAccumulator() {
@@ -127,14 +126,13 @@ public class Day8Puzzle1 {
 
         @Override
         public String toString() {
-            return "Instruction{" +
-                  "operation=" + operation +
-                  ", arg=" + arg +
-                  '}';
+            return "Instruction{" + "operation=" + operation + ", arg=" + arg + '}';
         }
     }
 
     enum Operation {
-        acc, jmp, nop
+        acc,
+        jmp,
+        nop
     }
 }

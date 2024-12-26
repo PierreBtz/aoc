@@ -1,11 +1,11 @@
 package eu.pierrebeitz.aoc._2020;
 
+import static eu.pierrebeitz.aoc.utils.AocUtils.loadInputForDay;
+
 import java.io.IOException;
 import java.util.function.IntConsumer;
 import java.util.stream.Collector;
 import java.util.stream.Stream;
-
-import static eu.pierrebeitz.aoc.utils.AocUtils.loadInputForDay;
 
 public class Day10Puzzle1 {
 
@@ -17,13 +17,8 @@ public class Day10Puzzle1 {
 
     static int solve(Stream<String> lines) {
         var puzzleStatistics = lines.map(Integer::valueOf)
-              .sorted()
-              .collect(
-                    Collector.of(
-                          PuzzleStatistics::new,
-                          PuzzleStatistics::accept,
-                          PuzzleStatistics::combine
-                    ));
+                .sorted()
+                .collect(Collector.of(PuzzleStatistics::new, PuzzleStatistics::accept, PuzzleStatistics::combine));
         return puzzleStatistics.getOneDiffCount() * (puzzleStatistics.getThreeDiffCount() + 1);
     }
 

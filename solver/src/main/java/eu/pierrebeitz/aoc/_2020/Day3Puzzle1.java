@@ -1,7 +1,6 @@
 package eu.pierrebeitz.aoc._2020;
 
 import eu.pierrebeitz.aoc.utils.AocUtils;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -95,10 +94,7 @@ public class Day3Puzzle1 {
 
         @Override
         public String toString() {
-            return "Position{" +
-                  "x=" + x +
-                  ", y=" + y +
-                  '}';
+            return "Position{" + "x=" + x + ", y=" + y + '}';
         }
 
         public int getY() {
@@ -125,10 +121,7 @@ public class Day3Puzzle1 {
 
         @Override
         public String toString() {
-            return "Slope{" +
-                  "dx=" + dx +
-                  ", dy=" + dy +
-                  '}';
+            return "Slope{" + "dx=" + dx + ", dy=" + dy + '}';
         }
     }
 }

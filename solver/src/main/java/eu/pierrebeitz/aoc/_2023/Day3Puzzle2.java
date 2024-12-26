@@ -2,7 +2,6 @@ package eu.pierrebeitz.aoc._2023;
 
 import eu.pierrebeitz.aoc.utils.DayPuzzle;
 import eu.pierrebeitz.aoc.utils.Matrix;
-
 import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,7 +57,8 @@ public class Day3Puzzle2 implements DayPuzzle<Integer> {
         return gearMap.entrySet().stream()
                 .filter(e -> e.getValue().size() == 2)
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
-                .values().stream()
+                .values()
+                .stream()
                 .map(Day3Puzzle2::ratio)
                 .mapToInt(i -> i)
                 .sum();
@@ -70,9 +70,7 @@ public class Day3Puzzle2 implements DayPuzzle<Integer> {
     }
 
     private static List<Matrix.Node> getGearNeighbour(List<Matrix.Node> nodes) {
-        return nodes.stream()
-                .filter(n -> isGear(n.getValue()))
-                .toList();
+        return nodes.stream().filter(n -> isGear(n.getValue())).toList();
     }
 
     private static boolean isGear(char c) {

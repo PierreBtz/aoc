@@ -1,20 +1,20 @@
 package eu.pierrebeitz.aoc.utils;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.io.BufferedReader;
 import java.io.StringReader;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import org.junit.jupiter.api.Test;
 
 class MatrixTest {
 
     @Test
     void parse() {
-        var input = """
+        var input =
+                """
                 467..114..
                 ...*......
                 ..35..633.
@@ -69,7 +69,8 @@ class MatrixTest {
 
     @Test
     void inDirection() {
-        var input = """
+        var input =
+                """
                 467..114..
                 ...*......
                 ..35..633.
@@ -89,5 +90,4 @@ class MatrixTest {
         assertEquals('.', matrix.getInDirection(0, 0, Matrix.Direction.S).getValue());
         assertNull(matrix.getInDirection(0, 0, Matrix.Direction.W));
     }
-
 }

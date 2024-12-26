@@ -49,3 +49,7 @@ tasks:
       OUTPUT: "{{index .MATCH 3}}"
     cmds:
       - java -jar {{.GENERATOR_JAR_FILE}} --year {{.YEAR}} --day {{.DAY}} --part {{.PART}} --output {{.OUTPUT}}
+  fmt:
+    desc: Format the code of the project
+    cmds:
+      - mvn spotless:apply

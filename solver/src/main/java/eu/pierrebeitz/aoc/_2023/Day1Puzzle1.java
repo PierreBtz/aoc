@@ -1,17 +1,13 @@
 package eu.pierrebeitz.aoc._2023;
 
 import eu.pierrebeitz.aoc.utils.DayPuzzle;
-
 import java.io.BufferedReader;
 
 public class Day1Puzzle1 implements DayPuzzle<Integer> {
 
     @Override
     public Integer solve(BufferedReader reader) {
-        return reader.lines()
-                .map(Day1Puzzle1::processLine)
-                .mapToInt(i -> i)
-                .sum();
+        return reader.lines().map(Day1Puzzle1::processLine).mapToInt(i -> i).sum();
     }
 
     static int processLine(String line) {

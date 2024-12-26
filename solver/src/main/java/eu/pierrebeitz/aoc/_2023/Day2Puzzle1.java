@@ -1,7 +1,6 @@
 package eu.pierrebeitz.aoc._2023;
 
 import eu.pierrebeitz.aoc.utils.DayPuzzle;
-
 import java.io.BufferedReader;
 import java.util.Arrays;
 import java.util.List;
@@ -24,8 +23,7 @@ public class Day2Puzzle1 implements DayPuzzle<Integer> {
     }
 
     static boolean isValid(Game game) {
-        boolean isValid = game.gameSets().stream()
-                .allMatch(Day2Puzzle1::isValid);
+        boolean isValid = game.gameSets().stream().allMatch(Day2Puzzle1::isValid);
         System.err.printf("Game: %s is valid: %s%n", game, isValid);
         return isValid;
     }
@@ -46,14 +44,13 @@ public class Day2Puzzle1 implements DayPuzzle<Integer> {
             }
             System.err.printf("Found a game id: %d%n", gameId);
             var setSplit = gameSplit[1].split(";");
-            var gameSets = Arrays.stream(setSplit)
-                    .map(GameSet::fromString)
-                    .toList();
+            var gameSets = Arrays.stream(setSplit).map(GameSet::fromString).toList();
             return new Game(gameId, gameSets);
         }
 
         record GameSet(int redCount, int greenCount, int blueCount) {
-            private static final Pattern CUBE_COUNT_PATTERN = Pattern.compile("^(?<count>\\d+) (?<color>red|green|blue)");
+            private static final Pattern CUBE_COUNT_PATTERN =
+                    Pattern.compile("^(?<count>\\d+) (?<color>red|green|blue)");
 
             static GameSet fromString(String str) {
                 System.err.printf("Current set: %s%n", str);

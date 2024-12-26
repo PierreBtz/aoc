@@ -7,8 +7,8 @@ import java.io.BufferedReader;
 import org.junit.jupiter.api.Test;
 
 public class Day3Puzzle2Test {
-  @Test
-  void testExample(@TestData BufferedReader reader) {
-    assertEquals(48, new Day3Puzzle2().solve(reader));
-  }
+    @Test
+    void testExample(@TestData BufferedReader reader) {
+        assertEquals(48, new Day3Puzzle2().solve(reader));
+    }
 }

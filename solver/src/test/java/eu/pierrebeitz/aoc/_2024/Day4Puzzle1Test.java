@@ -1,11 +1,10 @@
 package eu.pierrebeitz.aoc._2024;
 
-import eu.pierrebeitz.aoc.utils.TestData;
-import org.junit.jupiter.api.Test;
-
-import java.io.BufferedReader;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import eu.pierrebeitz.aoc.utils.TestData;
+import java.io.BufferedReader;
+import org.junit.jupiter.api.Test;
 
 public class Day4Puzzle1Test {
     @Test

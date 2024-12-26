@@ -1,7 +1,6 @@
 package eu.pierrebeitz.aoc._2020;
 
 import eu.pierrebeitz.aoc.utils.AocUtils;
-
 import java.io.IOException;
 import java.util.regex.Pattern;
 
@@ -10,9 +9,9 @@ public class Day2Puzzle1 {
     public static void main(String[] args) throws IOException {
         try (var reader = AocUtils.loadInputForDay(2020, 2)) {
             var result = reader.lines()
-                  .map(RecordPuzzle1::new)
-                  .filter(RecordPuzzle1::isValid)
-                  .count();
+                    .map(RecordPuzzle1::new)
+                    .filter(RecordPuzzle1::isValid)
+                    .count();
             System.out.println(result);
         }
     }
@@ -24,16 +23,14 @@ public class Day2Puzzle1 {
         }
 
         boolean isValid() {
-            var count = password.chars()
-                  .filter(c -> c == constraint)
-                  .count();
+            var count = password.chars().filter(c -> c == constraint).count();
             var valid = range.contains(count);
             System.err.println(this + "\n is: " + (valid ? "valid" : "not valid"));
             return valid;
         }
     }
 
-    static abstract class ValidableRecord {
+    abstract static class ValidableRecord {
         final Range range;
         final char constraint;
         final String password;
@@ -53,11 +50,10 @@ public class Day2Puzzle1 {
 
         @Override
         public String toString() {
-            return "ValidableRecord{" +
-                  "range=" + range +
-                  ", constraint=" + constraint +
-                  ", password='" + password + '\'' +
-                  '}';
+            return "ValidableRecord{" + "range="
+                    + range + ", constraint="
+                    + constraint + ", password='"
+                    + password + '\'' + '}';
         }
 
         static class Range {
@@ -83,10 +79,7 @@ public class Day2Puzzle1 {
 
             @Override
             public String toString() {
-                return "Range{" +
-                      "lower=" + lower +
-                      ", upper=" + upper +
-                      '}';
+                return "Range{" + "lower=" + lower + ", upper=" + upper + '}';
             }
         }
     }

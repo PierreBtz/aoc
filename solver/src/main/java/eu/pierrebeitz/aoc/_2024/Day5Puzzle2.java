@@ -1,14 +1,13 @@
 package eu.pierrebeitz.aoc._2024;
 
-import eu.pierrebeitz.aoc.utils.DayPuzzle;
+import static eu.pierrebeitz.aoc._2024.Day5Puzzle1.isInRightOrder;
 
+import eu.pierrebeitz.aoc.utils.DayPuzzle;
 import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
-
-import static eu.pierrebeitz.aoc._2024.Day5Puzzle1.isInRightOrder;
 
 public class Day5Puzzle2 implements DayPuzzle<Integer> {
     @Override
@@ -20,7 +19,8 @@ public class Day5Puzzle2 implements DayPuzzle<Integer> {
         System.err.println("----Starting analysis----");
         return updates.stream()
                 .filter(update -> !isInRightOrder(update, rules))
-                .map(update -> update.stream().sorted(new UpdateComparator(rules)).toList())
+                .map(update ->
+                        update.stream().sorted(new UpdateComparator(rules)).toList())
                 .mapToInt(update -> update.get(update.size() / 2))
                 .sum();
     }

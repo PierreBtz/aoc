@@ -2,7 +2,6 @@ package eu.pierrebeitz.aoc._2024;
 
 import eu.pierrebeitz.aoc.utils.DayPuzzle;
 import eu.pierrebeitz.aoc.utils.Pair;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +16,8 @@ public class Day1Puzzle1 implements DayPuzzle<Integer> {
         var sortedLists = getSortedLists(reader);
         var distance = 0;
         for (var i = 0; i < sortedLists.first().size(); i++) {
-            distance += Math.abs(sortedLists.first().get(i) - sortedLists.second().get(i));
+            distance +=
+                    Math.abs(sortedLists.first().get(i) - sortedLists.second().get(i));
         }
         return distance;
     }

@@ -1,5 +1,8 @@
 package eu.pierrebeitz.aoc._2020;
 
+import static eu.pierrebeitz.aoc.utils.AocUtils.combinationsOf;
+import static eu.pierrebeitz.aoc.utils.AocUtils.loadInputForDay;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
@@ -7,9 +10,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import static eu.pierrebeitz.aoc.utils.AocUtils.combinationsOf;
-import static eu.pierrebeitz.aoc.utils.AocUtils.loadInputForDay;
 
 public class Day9Puzzle1 {
 
@@ -34,8 +34,7 @@ public class Day9Puzzle1 {
         }
 
         static XmasSequence fromStream(Stream<String> streamSequence) {
-            var sequence = streamSequence.map(Long::valueOf)
-                  .collect(Collectors.toList());
+            var sequence = streamSequence.map(Long::valueOf).collect(Collectors.toList());
             return new XmasSequence(sequence);
         }
 
@@ -57,7 +56,8 @@ public class Day9Puzzle1 {
         long findWeakness() {
             var maybeInvalid = validateSequence();
             if (maybeInvalid.isPresent()) {
-                var vulnerabilitySet = Stream.of(sequence.get(0), sequence.get(1)).collect(Collectors.toSet());
+                var vulnerabilitySet =
+                        Stream.of(sequence.get(0), sequence.get(1)).collect(Collectors.toSet());
                 var vulnerabilitySetSum = sequence.get(0) + sequence.get(1);
                 var startOfSet = 0;
                 var endOfSet = 2;
@@ -72,8 +72,7 @@ public class Day9Puzzle1 {
                         vulnerabilitySetSum -= currentNumber;
                     }
                 }
-                var summary = vulnerabilitySet.stream()
-                      .collect(Collectors.summarizingLong(Long::longValue));
+                var summary = vulnerabilitySet.stream().collect(Collectors.summarizingLong(Long::longValue));
                 return summary.getMax() + summary.getMin();
             }
             throw new UnsupportedOperationException("This was not expected...");
@@ -85,22 +84,22 @@ public class Day9Puzzle1 {
 
         private List<Long> computeAcceptableValues(List<List<Long>> combinations) {
             return combinations.stream()
-                  .map(pair -> pair.get(0) + pair.get(1))
-                  .distinct()
-                  .collect(Collectors.toList());
+                    .map(pair -> pair.get(0) + pair.get(1))
+                    .distinct()
+                    .collect(Collectors.toList());
         }
 
         private List<List<Long>> updateCombination(List<List<Long>> combinations, Long valueToRemove, Long valueToAdd) {
             return combinations.stream()
-                  .map(value -> {
-                      if (valueToRemove.equals(value.get(0))) {
-                          return Arrays.asList(valueToAdd, value.get(1));
-                      } else if (valueToRemove.equals(value.get(1))) {
-                          return Arrays.asList(valueToAdd, value.get(0));
-                      }
-                      return value;
-                  })
-                  .collect(Collectors.toList());
+                    .map(value -> {
+                        if (valueToRemove.equals(value.get(0))) {
+                            return Arrays.asList(valueToAdd, value.get(1));
+                        } else if (valueToRemove.equals(value.get(1))) {
+                            return Arrays.asList(valueToAdd, value.get(0));
+                        }
+                        return value;
+                    })
+                    .collect(Collectors.toList());
         }
     }
 }

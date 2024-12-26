@@ -1,7 +1,6 @@
 package eu.pierrebeitz.aoc._2020;
 
 import eu.pierrebeitz.aoc._2020.Day4Puzzle1.Password;
-
 import java.io.IOException;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
@@ -23,12 +22,12 @@ public class Day4Puzzle2 {
         @Override
         public boolean test(Password password) {
             return validateByr(password)
-                  && validateIyr(password)
-                  && validateEyr(password)
-                  && validateHgt(password)
-                  && validateHcl(password)
-                  && validateEcl(password)
-                  && validatePid(password);
+                    && validateIyr(password)
+                    && validateEyr(password)
+                    && validateHgt(password)
+                    && validateHcl(password)
+                    && validateEcl(password)
+                    && validatePid(password);
         }
 
         private boolean validateByr(Password password) {

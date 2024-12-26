@@ -1,7 +1,6 @@
 package eu.pierrebeitz.aoc._2024;
 
 import eu.pierrebeitz.aoc.utils.DayPuzzle;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.regex.Pattern;

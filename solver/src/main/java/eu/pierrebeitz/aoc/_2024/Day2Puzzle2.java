@@ -1,10 +1,8 @@
 package eu.pierrebeitz.aoc._2024;
 
 import eu.pierrebeitz.aoc.utils.DayPuzzle;
-
 import java.io.BufferedReader;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -36,9 +34,7 @@ public class Day2Puzzle2 implements DayPuzzle<Long> {
         }
 
         boolean isValid() {
-            return reports.stream()
-                    .parallel()
-                    .anyMatch(Day2Puzzle1.Report::isValid);
+            return reports.stream().parallel().anyMatch(Day2Puzzle1.Report::isValid);
         }
     }
 }

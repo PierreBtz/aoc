@@ -1,17 +1,16 @@
 package eu.pierrebeitz.aoc.generator;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 class GeneratorTest {
     private String oldBaseDir;
@@ -44,8 +43,7 @@ class GeneratorTest {
         try (var is = GeneratorTest.class.getResourceAsStream("/expected-production-file.java")) {
             assertEquals(
                     new String(is.readAllBytes(), StandardCharsets.UTF_8),
-                    Files.readString(generatedFile, StandardCharsets.UTF_8)
-            );
+                    Files.readString(generatedFile, StandardCharsets.UTF_8));
         }
     }
 
@@ -62,8 +60,7 @@ class GeneratorTest {
         try (var is = GeneratorTest.class.getResourceAsStream("/expected-test-file.java")) {
             assertEquals(
                     new String(is.readAllBytes(), StandardCharsets.UTF_8),
-                    Files.readString(generatedFile, StandardCharsets.UTF_8)
-            );
+                    Files.readString(generatedFile, StandardCharsets.UTF_8));
         }
     }
 

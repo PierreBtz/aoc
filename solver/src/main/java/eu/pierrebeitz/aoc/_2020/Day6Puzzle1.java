@@ -1,7 +1,6 @@
 package eu.pierrebeitz.aoc._2020;
 
 import eu.pierrebeitz.aoc.utils.AocUtils;
-
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Set;
@@ -17,9 +16,9 @@ public class Day6Puzzle1 {
     static void computeCount(Function<String, Group> groupBuilder) throws IOException {
         try (var reader = AocUtils.loadInputForDay(2020, 6)) {
             var count = AocUtils.readByGroupAndMapToObject(reader, groupBuilder).stream()
-                  .peek(System.err::println)
-                  .map(Group::getQuestionCount)
-                  .reduce(0, Integer::sum);
+                    .peek(System.err::println)
+                    .map(Group::getQuestionCount)
+                    .reduce(0, Integer::sum);
             System.out.println(count);
         }
     }
@@ -37,9 +36,7 @@ public class Day6Puzzle1 {
 
         @Override
         public String toString() {
-            return "Group{" +
-                  "allAnswers=" + allAnswers +
-                  '}';
+            return "Group{" + "allAnswers=" + allAnswers + '}';
         }
     }
 
@@ -47,10 +44,8 @@ public class Day6Puzzle1 {
 
         @Override
         public Group apply(String s) {
-            return new Group(s.chars()
-                  .mapToObj(c -> (char) c)
-                  .filter(c -> c != '\n')
-                  .collect(Collectors.toSet()));
+            return new Group(
+                    s.chars().mapToObj(c -> (char) c).filter(c -> c != '\n').collect(Collectors.toSet()));
         }
     }
 }

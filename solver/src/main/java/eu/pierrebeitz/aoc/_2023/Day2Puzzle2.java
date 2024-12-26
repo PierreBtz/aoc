@@ -1,7 +1,6 @@
 package eu.pierrebeitz.aoc._2023;
 
 import eu.pierrebeitz.aoc.utils.DayPuzzle;
-
 import java.io.BufferedReader;
 
 public class Day2Puzzle2 implements DayPuzzle<Integer> {

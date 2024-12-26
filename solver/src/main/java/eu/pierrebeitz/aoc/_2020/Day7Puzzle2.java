@@ -1,9 +1,9 @@
 package eu.pierrebeitz.aoc._2020;
 
-import java.io.IOException;
-
 import static eu.pierrebeitz.aoc._2020.Day7Puzzle1.BAG_OF_INTEREST;
 import static eu.pierrebeitz.aoc._2020.Day7Puzzle1.buildBags;
+
+import java.io.IOException;
 
 public class Day7Puzzle2 {
 

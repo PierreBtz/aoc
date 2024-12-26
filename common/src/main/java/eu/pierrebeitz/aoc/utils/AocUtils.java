@@ -14,23 +14,22 @@ public enum AocUtils {
 
     private static final String SEPARATOR = "";
 
-    // use the Loader class all the calls to this methods will now fail since the resources have been scrubbed from the repo
+    // use the Loader class all the calls to this methods will now fail since the resources have been scrubbed from the
+    // repo
     @Deprecated
     public static BufferedReader loadInputForDay(int year, int day) {
-        var resourcePath = "/eu/pierrebeitz/aoc/_" + year + "/input-" + (isJunit() ? "example-" : "") + "day" + day + ".txt";
-        return new BufferedReader(
-              new InputStreamReader(
-                    AocUtils.class.getResourceAsStream(resourcePath)
-              )
-        );
+        var resourcePath =
+                "/eu/pierrebeitz/aoc/_" + year + "/input-" + (isJunit() ? "example-" : "") + "day" + day + ".txt";
+        return new BufferedReader(new InputStreamReader(AocUtils.class.getResourceAsStream(resourcePath)));
     }
 
     private static boolean isJunit() {
         return Arrays.stream(Thread.currentThread().getStackTrace())
-              .anyMatch(e -> e.getClassName().startsWith("org.junit"));
+                .anyMatch(e -> e.getClassName().startsWith("org.junit"));
     }
 
-    public static <T> List<T> readByGroupAndMapToObject(BufferedReader reader, Function<String, T> mapper) throws IOException {
+    public static <T> List<T> readByGroupAndMapToObject(BufferedReader reader, Function<String, T> mapper)
+            throws IOException {
         var acc = "";
         var result = new ArrayList<T>();
         while (reader.ready()) {
@@ -54,7 +53,8 @@ public enum AocUtils {
     }
 
     // simple version for 2 elements but support for k can easily added if a future puzzle needs it
-    private static <T> void combination(List<List<T>> combinations, List<T> currentCombination, List<T> source, int start, int end) {
+    private static <T> void combination(
+            List<List<T>> combinations, List<T> currentCombination, List<T> source, int start, int end) {
         if (2 == currentCombination.size()) {
             combinations.add(currentCombination);
         } else if (start <= end) {

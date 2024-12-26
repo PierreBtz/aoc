@@ -26,7 +26,9 @@ public class Loader {
     }
 
     @SuppressWarnings("rawtypes")
-    public void load() throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, IOException, InterruptedException, ClassNotFoundException {
+    public void load()
+            throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException,
+                    IOException, InterruptedException, ClassNotFoundException {
         String className = String.format("eu.pierrebeitz.aoc._%s.Day%sPuzzle%s", year, day, puzzle);
         var clasz = Loader.class.getClassLoader().loadClass(className);
         if (!DayPuzzle.class.isAssignableFrom(clasz)) {
@@ -39,9 +41,12 @@ public class Loader {
         }
     }
 
-    public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, IOException, InterruptedException {
+    public static void main(String[] args)
+            throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException,
+                    IllegalAccessException, IOException, InterruptedException {
         if (args.length != 3) {
-            System.err.println("""
+            System.err.println(
+                    """
                     Not the proper argument count, should be:
                     * arg0: year
                     * arg1: day

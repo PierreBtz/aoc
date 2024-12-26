@@ -2,7 +2,6 @@ package eu.pierrebeitz.aoc._2024;
 
 import eu.pierrebeitz.aoc.utils.DayPuzzle;
 import eu.pierrebeitz.aoc.utils.Matrix;
-
 import java.io.BufferedReader;
 import java.util.HashSet;
 import java.util.Set;

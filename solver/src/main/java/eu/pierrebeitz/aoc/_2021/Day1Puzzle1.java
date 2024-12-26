@@ -1,5 +1,7 @@
 package eu.pierrebeitz.aoc._2021;
 
+import static eu.pierrebeitz.aoc.utils.AocUtils.loadInputForDay;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Collections;
@@ -10,8 +12,6 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 
-import static eu.pierrebeitz.aoc.utils.AocUtils.loadInputForDay;
-
 public class Day1Puzzle1 {
 
     public static void main(String[] args) throws IOException {
@@ -21,9 +21,7 @@ public class Day1Puzzle1 {
     }
 
     public static int compute(BufferedReader reader) {
-        return reader.lines()
-              .map(Integer::parseInt)
-              .collect(new ComputeIncreaseCollector());
+        return reader.lines().map(Integer::parseInt).collect(new ComputeIncreaseCollector());
     }
 
     // for the fun of writing a collector

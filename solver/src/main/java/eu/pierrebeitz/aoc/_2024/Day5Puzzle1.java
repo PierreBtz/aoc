@@ -1,7 +1,6 @@
 package eu.pierrebeitz.aoc._2024;
 
 import eu.pierrebeitz.aoc.utils.DayPuzzle;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,9 +43,7 @@ public class Day5Puzzle1 implements DayPuzzle<Integer> {
                     var update = Arrays.stream(line.split(","))
                             .map(Integer::parseInt)
                             .toList();
-                    updates.add(
-                            update
-                    );
+                    updates.add(update);
                     System.err.printf("New update added %s%n", update);
                 }
                 line = reader.readLine();
@@ -110,5 +107,4 @@ public class Day5Puzzle1 implements DayPuzzle<Integer> {
             return afterRules;
         }
     }
-
 }
