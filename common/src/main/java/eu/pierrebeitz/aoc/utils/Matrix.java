@@ -29,6 +29,26 @@ public class Matrix implements Iterable<Matrix.Node> {
         fillNodes();
     }
 
+    public Matrix(Matrix m) {
+        matrix = m.matrix.stream()
+                .map(row -> row.stream().map(Node::new).toList())
+                .toList();
+    }
+
+    @Override
+    public String toString() {
+        var it = iterator();
+        var builder = new StringBuilder();
+        while (it.hasNext()) {
+            var node = it.next();
+            builder.append(node.value);
+            if (node.getCol() == columnSize() - 1) {
+                builder.append(System.lineSeparator());
+            }
+        }
+        return builder.toString();
+    }
+
     private void fillNodes() {
         var matrixIterator = new MatrixIterator();
         while (matrixIterator.hasNext()) {
@@ -106,8 +126,12 @@ public class Matrix implements Iterable<Matrix.Node> {
         return matrix.get(0).size();
     }
 
+    public int rowSize() {
+        return matrix.size();
+    }
+
     public class Node {
-        private final char value;
+        private char value;
         private int row;
         private int col;
 
@@ -115,8 +139,18 @@ public class Matrix implements Iterable<Matrix.Node> {
             this.value = value;
         }
 
+        public Node(Node node) {
+            this.value = node.value;
+            this.row = node.row;
+            this.col = node.col;
+        }
+
         public char getValue() {
             return value;
+        }
+
+        public void setValue(char value) {
+            this.value = value;
         }
 
         public int getRow() {

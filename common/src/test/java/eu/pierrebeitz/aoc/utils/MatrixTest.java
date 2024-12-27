@@ -90,4 +90,26 @@ class MatrixTest {
         assertEquals('.', matrix.getInDirection(0, 0, Matrix.Direction.S).getValue());
         assertNull(matrix.getInDirection(0, 0, Matrix.Direction.W));
     }
+
+    @Test
+    void print() {
+        var input =
+                """
+                467..114..
+                ...*......
+                ..35..633.
+                ......#...
+                617*......
+                .....+.58.
+                ..592.....
+                ......755.
+                ...$.*....
+                .664.598..
+                """;
+
+        var reader = new BufferedReader(new StringReader(input));
+        var matrix = new Matrix(reader);
+
+        assertEquals(input, matrix.toString());
+    }
 }
