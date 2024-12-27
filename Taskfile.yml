@@ -32,6 +32,18 @@ tasks:
       - quick-build
     cmds:
       - java -jar {{.SOLVER_JAR_FILE}} {{.YEAR}} {{.DAY}} {{.PART}}
+  debug-day-*-*-*:
+    dotenv:
+      - .env
+    desc: Debug the solver for a given day/part
+    vars:
+      YEAR: "{{index .MATCH 0}}"
+      DAY: "{{index .MATCH 1}}"
+      PART: "{{index .MATCH 2}}"
+    deps:
+      - quick-build
+    cmds:
+      - java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005 -jar {{.SOLVER_JAR_FILE}} {{.YEAR}} {{.DAY}} {{.PART}}
   run-test-*-*-*:
     desc: Runt the tests for a given day/part
     vars:
