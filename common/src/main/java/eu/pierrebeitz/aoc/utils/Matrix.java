@@ -89,6 +89,10 @@ public class Matrix implements Iterable<Matrix.Node> {
         return row < matrix.size() && column < matrix.get(0).size() && row >= 0 && column >= 0;
     }
 
+    public boolean withinBounds(Coordinate coordinate) {
+        return withinBounds(coordinate.row(), coordinate.col());
+    }
+
     public boolean withinBounds(int row, int column, Direction direction) {
         return withinBounds(row + direction.getDeltaRow(), column + direction.getDeltaColumn());
     }
@@ -128,6 +132,14 @@ public class Matrix implements Iterable<Matrix.Node> {
 
     public int rowSize() {
         return matrix.size();
+    }
+
+    public void markCoordinates(List<Coordinate> coordinates, char c) {
+        for (var coordinate : coordinates) {
+            if (withinBounds(coordinate)) {
+                getAt(coordinate.row(), coordinate.col()).setValue(c);
+            }
+        }
     }
 
     public class Node {
@@ -172,6 +184,15 @@ public class Matrix implements Iterable<Matrix.Node> {
         @Override
         public int hashCode() {
             return Objects.hash(value, row, col);
+        }
+
+        public Coordinate getCoordinate() {
+            return new Coordinate(getRow(), getCol());
+        }
+
+        @Override
+        public String toString() {
+            return "Node[" + row + "," + col + "|" + value + "]";
         }
     }
 
@@ -236,6 +257,14 @@ public class Matrix implements Iterable<Matrix.Node> {
 
         public int getDeltaColumn() {
             return deltaColumn;
+        }
+    }
+
+    // TODO the grid should probably be refactored to use this
+    public record Coordinate(int row, int col) {
+
+        public double distance(Coordinate coordinate) {
+            return Math.sqrt(Math.pow(Math.abs(row - coordinate.row), 2) + Math.pow(Math.abs(col - coordinate.col), 2));
         }
     }
 }
